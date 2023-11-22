@@ -70,8 +70,12 @@ SkyPlotOptions(
 - **Device Scanning**: Show available devices in a certain range.
 
 ## Contributing
+### :beer: Pull requests are welcome!
+Don't forget that `open-source` makes no sense without contributors. No matter how big your changes are, it helps us a lot even it is a line of change.
 
-Your contributions to improve or extend SkyPlot are highly appreciated. Please refer to our contributing guidelines for more information.
+There might be a lot of grammar issues in the docs. It's a big help to us to fix them if you are fluent in English.
+
+Reporting bugs and issues are contribution too, yes it is.
 
 ## Author
 
@@ -81,7 +85,4 @@ Charles Gameti: [gameticharles@GitHub][github_cg].
 
 ## License
 
-This library is provided under the
-[Apache License - Version 2.0][apache_license].
-
-[apache_license]: https://www.apache.org/licenses/LICENSE-2.0.txt
+This library is provided under the MIT.
