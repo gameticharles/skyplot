@@ -6,3 +6,4 @@ export 'src/options.dart';
 export 'src/sky_object.dart';
 export 'src/sky_data.dart';
 export 'src/id_text_position.dart';
+export 'src/radar_options.dart';

@@ -1,3 +1,12 @@
+## 0.0.4
+
+* **[BREAKING]** Removed padding from the division text
+* **[FEATURE]** Added option for adjust the distance of the elevation text
+* **[FEATURE]** Added a feature to show radar on the plot in options
+* **[IMPROVEMENT]** Wrote documentation on the remaining classes
+* **[BUG_FIX]** Layout render error
+* **[IMPROVEMENT]** increased drawing performance
+
 ## 0.0.3
 
 * **[BUG_FIX]** Removed duplicate widgets

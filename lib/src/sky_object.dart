@@ -15,8 +15,8 @@ class SkyObject extends StatelessWidget {
   /// The optional child widget to display within the sky object widget.
   final Widget? child;
 
-  /// The sky data representing the object.
-  final SkyData skyData;
+  /// The option sky data representing the object.
+  final SkyData? skyData;
 
   /// The size of the satellite flag.
   final double size;
@@ -51,41 +51,30 @@ class SkyObject extends StatelessWidget {
           width: size,
           height: size,
           clipBehavior: Clip.hardEdge,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: skyData.usedInFix ?? false
-                ? Colors.green
-                : Colors.lightBlueAccent,
-            boxShadow: const [
-              BoxShadow(
-                offset: Offset(1.5, 1.5),
-                color: Colors.black45,
-                blurRadius: 3,
-              ),
-            ],
-          ),
+          decoration: (skyData != null && skyData!.usedInFix == true)
+              ? options.skyObjectInFixDecoration
+              : options.skyObjectNotInFixDecoration,
           child: child != null
               ? Center(
-                  child: FittedBox(
-                    child: child,
-                  ),
+                  child: child,
                 )
               : null,
         ),
-        Positioned(
-          top: options.idTextPosition.top,
-          bottom: options.idTextPosition.bottom,
-          right: options.idTextPosition.right,
-          left: options.idTextPosition.left,
-          height: options.idTextPosition.height,
-          width: options.idTextPosition.width,
-          child: Text(
-            '${skyData.id}',
-            style: skyData.usedInFix ?? false
-                ? options.satelliteIdInFixTextStyle
-                : options.satelliteIdNotInFixTextStyle,
+        if (skyData != null)
+          Positioned(
+            top: options.idTextPosition.top,
+            bottom: options.idTextPosition.bottom,
+            right: options.idTextPosition.right,
+            left: options.idTextPosition.left,
+            height: options.idTextPosition.height,
+            width: options.idTextPosition.width,
+            child: Text(
+              '${skyData!.id}',
+              style: skyData!.usedInFix ?? false
+                  ? options.satelliteIdInFixTextStyle
+                  : options.satelliteIdNotInFixTextStyle,
+            ),
           ),
-        ),
       ],
     );
   }

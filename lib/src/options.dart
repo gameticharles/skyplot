@@ -23,6 +23,11 @@ enum DirectionDetail {
   /// This option is suitable for minimalistic designs where direction labels are not required.
   none,
 
+  /// Displays only one cardinal direction: North (N).
+  ///
+  /// This option provides a basic orientation reference, suitable for simple directional needs.
+  one,
+
   /// Displays two primary cardinal directions: North (N) and South (S).
   ///
   /// This option provides a basic orientation reference, suitable for simple directional needs.
@@ -91,6 +96,12 @@ class SkyPlotOptions {
   /// Vertical offset for text positioning.
   final double verticalTextOffset;
 
+  /// Horizontal offset for text positioning. Negative values move text towards the center.
+  final double elevationHorizontalTextOffset;
+
+  /// Vertical offset for text positioning.
+  final double elevationVerticalTextOffset;
+
   /// Horizontal offset for direction text positioning. Negative values move text towards the center.
   final double directionHorizontalTextOffset;
 
@@ -148,6 +159,9 @@ class SkyPlotOptions {
   /// Show directional text on the plot
   final bool showDirectionalText;
 
+  /// Whether to show directional ticks
+  final bool showDirectionDivisionTicks;
+
   /// Show sky object not used in fix
   final bool showSkyObjectNotInFix;
 
@@ -166,7 +180,11 @@ class SkyPlotOptions {
   /// Specifies the level of detail for direction labels.
   final DirectionDetail directionDetail;
 
-  // Color textColor = Theme.of(context).colorScheme.primary;
+  /// Decoration of the container for sky objects in fix
+  final BoxDecoration? skyObjectInFixDecoration;
+
+  /// Decoration of the container for sky objects not used in fix
+  final BoxDecoration? skyObjectNotInFixDecoration;
 
   /// Constructs a [SkyPlotOptions] instance with given parameters.
   SkyPlotOptions({
@@ -182,7 +200,7 @@ class SkyPlotOptions {
       shadows: [
         Shadow(
           offset: Offset(1.5, 1.5),
-          color: Colors.black45,
+          color: Colors.grey,
           blurRadius: 3,
         ),
       ],
@@ -193,7 +211,7 @@ class SkyPlotOptions {
       shadows: [
         Shadow(
           offset: Offset(1.5, 1.5),
-          color: Colors.black45,
+          color: Colors.grey,
           blurRadius: 3,
         ),
       ],
@@ -206,6 +224,8 @@ class SkyPlotOptions {
     this.verticalTextOffset = -5.0,
     this.directionHorizontalTextOffset = 5.0,
     this.directionVerticalTextOffset = 0.0,
+    this.elevationHorizontalTextOffset = 5.0,
+    this.elevationVerticalTextOffset = 0.0,
     this.divisionTextRotation = pi, //radians
     this.azimuthDivisionTickWith = 20,
     this.showAzimuthDivisionTick = true,
@@ -216,6 +236,7 @@ class SkyPlotOptions {
     this.showElevationDivisionTexts = true,
     this.showNorthArrowHead = true,
     this.showDirectionalText = true,
+    this.showDirectionDivisionTicks = true,
     this.showNorthArrowLine = false,
     this.showSkyObjectNotInFix = true,
     this.dashWidth = 5.0,
@@ -231,6 +252,8 @@ class SkyPlotOptions {
     Paint? arrowPaint,
     this.arrowHeadWidth = 15.0,
     this.arrowHeadHeight = 20.0,
+    BoxDecoration? skyObjectInFixDecoration,
+    BoxDecoration? skyObjectNotInFixDecoration,
   })  : idTextPosition = idTextPosition ??
             const SkyObjectIDTextPosition(bottom: -6.0, right: -8.0),
         horizonCirclePaint = horizonCirclePaint ?? Paint()
@@ -251,6 +274,30 @@ class SkyPlotOptions {
           ..color = Colors.red
           ..style = PaintingStyle.fill,
         // Get the text color from the theme
+        skyObjectInFixDecoration = skyObjectInFixDecoration ??
+            const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.green,
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(1.5, 1.5),
+                  color: Colors.grey,
+                  blurRadius: 3,
+                ),
+              ],
+            ),
+        skyObjectNotInFixDecoration = skyObjectNotInFixDecoration ??
+            const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.lightBlueAccent,
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(1.5, 1.5),
+                  color: Colors.grey,
+                  blurRadius: 3,
+                ),
+              ],
+            ),
         textPainter =
             textPainter ?? TextPainter(textDirection: TextDirection.ltr);
 }
