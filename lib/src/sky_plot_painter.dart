@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'options.dart';
-import 'sky_plot.dart';
+import 'skyplot.dart';
 
 class SkyPlotPainter extends CustomPainter {
   final List<SkyData>? skyData;

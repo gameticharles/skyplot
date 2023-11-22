@@ -161,7 +161,7 @@ class SkyPlotOptions {
   final TextPainter textPainter;
 
   /// Position of the satellite ID text.
-  final SatelliteIDTextPosition idTextPosition;
+  final SkyObjectIDTextPosition idTextPosition;
 
   /// Specifies the level of detail for direction labels.
   final DirectionDetail directionDetail;
@@ -221,7 +221,7 @@ class SkyPlotOptions {
     this.dashWidth = 5.0,
     this.dashSpace = 3.0,
     this.directionDetail = DirectionDetail.eight,
-    SatelliteIDTextPosition? idTextPosition,
+    SkyObjectIDTextPosition? idTextPosition,
     Paint? horizonCirclePaint,
     Paint? elevationRingPaint,
     Paint? divisionLinePaint,
@@ -232,7 +232,7 @@ class SkyPlotOptions {
     this.arrowHeadWidth = 15.0,
     this.arrowHeadHeight = 20.0,
   })  : idTextPosition = idTextPosition ??
-            const SatelliteIDTextPosition(bottom: -6.0, right: -8.0),
+            const SkyObjectIDTextPosition(bottom: -6.0, right: -8.0),
         horizonCirclePaint = horizonCirclePaint ?? Paint()
           ..color = Colors.blue
           ..style = PaintingStyle.stroke,
