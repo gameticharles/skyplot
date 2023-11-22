@@ -1,6 +1,7 @@
 name: skyplot
 description: "SkyPlot is a versatile Flutter library crafted to visualize positional data in a dynamic sky plot interface."
 version: 0.0.1
+repository: https://github.com/gameticharles/skyplot
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
