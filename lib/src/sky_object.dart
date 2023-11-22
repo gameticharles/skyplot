@@ -1,58 +1,92 @@
 import 'package:flutter/material.dart';
 
-/// A widget that represents an object in the sky plot, such as a satellite.
+import 'options.dart';
+import 'sky_data.dart';
+
+/// A widget that displays a sky object with an optional child widget.
 ///
-/// This widget displays a circular container with a customizable [child] widget inside.
-/// The color of the container indicates whether the object is used in a fix, based on [isUsedInFix].
+/// The `SkyObject` widget is used within the `SkyPlot` widget to represent
+/// individual sky objects, such as satellites. It can display a flag with an optional
+/// child widget, such as an icon or text.
 ///
-/// Parameters:
 /// - [size]: The size of the container. Determines the diameter of the circular representation.
 /// - [child]: A widget to display inside the circle. This could represent a satellite's flag or other relevant iconography.
-/// - [isUsedInFix]: A boolean indicating whether the object is part of a fix.
-///   If `true`, the container's color is green, indicating active usage.
-///   If `false` or `null`, the color is light blue, indicating non-active status.
 class SkyObject extends StatelessWidget {
-  /// The size of the circular container.
-  final double size;
-
-  /// The widget to be displayed inside the container, typically representing the object.
+  /// The optional child widget to display within the sky object widget.
   final Widget? child;
 
-  /// Indicates whether the object is used in a fix.
-  final bool? isUsedInFix;
+  /// The sky data representing the object.
+  final SkyData skyData;
 
-  /// Constructs a [SkyObject] with the given parameters.
+  /// The size of the satellite flag.
+  final double size;
+
+  /// Options to customize the appearance and behavior of the sky object.
+  final SkyPlotOptions options;
+
+  /// Creates a [SkyObject] widget.
+  ///
+  /// The [skyData] parameter is required and should contain the [SkyData] object
+  /// representing the sky object to be displayed.
+  ///
+  /// The [size] parameter determines the size of the satellite flag.
+  ///
+  /// The [options] parameter allows customization of various aspects of the satellite flag,
+  /// such as text styles, positioning, and paints.
   const SkyObject({
     super.key,
-    required this.child,
-    required this.isUsedInFix,
+    this.child,
+    required this.skyData,
     required this.size,
+    required this.options,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: size,
-      height: size,
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: isUsedInFix ?? false ? Colors.green : Colors.lightBlueAccent,
-        boxShadow: const [
-          BoxShadow(
-            offset: Offset(1.5, 1.5),
-            color: Colors.black45,
-            blurRadius: 3,
-          ),
-        ],
-      ),
-      child: child != null
-          ? Center(
-              child: FittedBox(
-                child: child,
+    return Stack(
+      alignment: Alignment.center,
+      clipBehavior: Clip.none,
+      children: [
+        Container(
+          width: size,
+          height: size,
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: skyData.usedInFix ?? false
+                ? Colors.green
+                : Colors.lightBlueAccent,
+            boxShadow: const [
+              BoxShadow(
+                offset: Offset(1.5, 1.5),
+                color: Colors.black45,
+                blurRadius: 3,
               ),
-            )
-          : null,
+            ],
+          ),
+          child: child != null
+              ? Center(
+                  child: FittedBox(
+                    child: child,
+                  ),
+                )
+              : null,
+        ),
+        Positioned(
+          top: options.idTextPosition.top,
+          bottom: options.idTextPosition.bottom,
+          right: options.idTextPosition.right,
+          left: options.idTextPosition.left,
+          height: options.idTextPosition.height,
+          width: options.idTextPosition.width,
+          child: Text(
+            '${skyData.id}',
+            style: skyData.usedInFix ?? false
+                ? options.satelliteIdInFixTextStyle
+                : options.satelliteIdNotInFixTextStyle,
+          ),
+        ),
+      ],
     );
   }
 }

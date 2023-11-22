@@ -2,14 +2,45 @@ import 'package:advance_math/advance_math.dart';
 import 'package:flutter/material.dart';
 
 import 'options.dart';
+import 'sky_data.dart';
 import 'sky_object.dart';
 import 'sky_plot_painter.dart';
 
+/// A widget that displays a sky plot visualization for a list of sky objects.
+///
+/// The `SkyPlot` widget takes a list of [SkyData] objects representing sky objects
+/// and visualizes their positions on a sky plot. It provides options to customize
+/// the appearance and behavior of the plot.
+///
+/// Example usage:
+/// ```dart
+/// SkyPlot(
+///   skyData: skyDataList,
+///   categories: categoryWidgets,
+///   options: SkyPlotOptions(),
+/// )
+/// ```
 class SkyPlot extends StatelessWidget {
+  /// The list of sky data representing sky objects to be visualized.
   final List<SkyData> skyData;
+
+  /// A map of category names to corresponding widgets to display on the sky plot.
   final Map<String, Widget> categories;
+
+  /// Options to customize the appearance and behavior of the sky plot.
   final SkyPlotOptions options;
 
+  /// Creates a [SkyPlot] widget.
+  ///
+  /// The [skyData] parameter is required and should contain a list of [SkyData] objects
+  /// representing the sky objects to be displayed on the sky plot.
+  ///
+  /// The [categories] parameter is a map that associates category names with
+  /// corresponding widgets to display on the sky plot. These widgets will be used to
+  /// represent different categories of sky objects.
+  ///
+  /// The [options] parameter allows customization of various aspects of the sky plot,
+  /// such as text styles, radii, divisions, offsets, and paints.
   SkyPlot({
     super.key,
     required this.skyData,
@@ -40,16 +71,17 @@ class SkyPlot extends StatelessWidget {
               ),
               size: size,
             ),
-            ...filteredSkyData.map((skyObject) {
-              double sizeOfFlag = (skyObject.usedInFix ?? false
+            ...filteredSkyData.map((skyObjectData) {
+              double sizeOfFlag = (skyObjectData.usedInFix ?? false
                       ? options.baseRadiusInFix
                       : options.baseRadiusNotInFix) *
                   2;
 
               // Convert azimuth and elevation to Cartesian coordinates
-              double radAzimuth = (skyObject.azimuthDegrees! - 90) * (pi / 180);
+              double radAzimuth =
+                  (skyObjectData.azimuthDegrees! - 90) * (pi / 180);
               double satelliteRadius =
-                  radius * (90 - skyObject.elevationDegrees!) / 90;
+                  radius * (90 - skyObjectData.elevationDegrees!) / 90;
               Offset satellitePosition = Offset(
                 center.dx + satelliteRadius * cos(radAzimuth) - sizeOfFlag / 2,
                 center.dy + satelliteRadius * sin(radAzimuth) - sizeOfFlag / 2,
@@ -58,11 +90,11 @@ class SkyPlot extends StatelessWidget {
               return Positioned(
                 left: satellitePosition.dx,
                 top: satellitePosition.dy,
-                child: SatelliteFlagWidget(
-                  satellite: skyObject,
+                child: SkyObject(
+                  skyData: skyObjectData,
                   size: sizeOfFlag,
                   options: options,
-                  child: categories[skyObject.category]!,
+                  child: categories[skyObjectData.category]!,
                 ),
               );
             }),
@@ -71,64 +103,4 @@ class SkyPlot extends StatelessWidget {
       },
     );
   }
-}
-
-class SatelliteFlagWidget extends StatelessWidget {
-  final Widget? child;
-  final SkyData satellite;
-  final double size;
-  final SkyPlotOptions options;
-
-  const SatelliteFlagWidget({
-    super.key,
-    this.child,
-    required this.satellite,
-    required this.size,
-    required this.options,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      clipBehavior: Clip.none,
-      children: [
-        SkyObject(
-          isUsedInFix: satellite.usedInFix,
-          size: size,
-          child: child,
-        ),
-        Positioned(
-          top: options.idTextPosition.top,
-          bottom: options.idTextPosition.bottom,
-          right: options.idTextPosition.right,
-          left: options.idTextPosition.left,
-          height: options.idTextPosition.height,
-          width: options.idTextPosition.width,
-          child: Text(
-            '${satellite.id}',
-            style: satellite.usedInFix ?? false
-                ? options.satelliteIdInFixTextStyle
-                : options.satelliteIdNotInFixTextStyle,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class SkyData {
-  const SkyData({
-    this.azimuthDegrees,
-    this.category,
-    this.elevationDegrees,
-    this.id,
-    this.usedInFix,
-  });
-
-  final double? azimuthDegrees;
-  final String? category;
-  final double? elevationDegrees;
-  final String? id;
-  final bool? usedInFix;
 }
