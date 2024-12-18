@@ -1,3 +1,11 @@
+## 0.0.6
+
+* **[IMPROVEMENT]** Updated dependencies.
+
+## 0.0.5
+
+* **[BUG_FIX]** Solved sky object nullable but required
+
 ## 0.0.4
 
 * **[BREAKING]** Removed padding from the division text

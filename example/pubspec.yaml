@@ -11,9 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  advance_math: ^3.3.7
-  raw_gnss: ^1.1.0+1
-  icons_plus: ^4.0.0
+  advance_math: ^4.0.2
+  raw_gnss: ^1.1.0
+  icons_plus: ^5.0.0
   permission_handler: ^11.1.0
   skyplot:
     path: ../
@@ -22,7 +22,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^5.0.0
 
 
 flutter:

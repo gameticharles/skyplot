@@ -36,7 +36,7 @@ class SkyObject extends StatelessWidget {
   const SkyObject({
     super.key,
     this.child,
-    required this.skyData,
+    this.skyData,
     required this.size,
     required this.options,
   });
