@@ -1,5 +1,5 @@
 /// A highly customizable Flutter sky plot library that supports.
-library skyplot;
+library;
 
 export 'src/skyplot.dart';
 export 'src/options.dart';

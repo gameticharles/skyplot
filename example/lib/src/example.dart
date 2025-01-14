@@ -131,7 +131,7 @@ class _SkyPlotGNSSState extends State<SkyPlotGNSS> {
                             decoration: BoxDecoration(
                               color: Theme.of(context)
                                   .primaryColor
-                                  .withOpacity(0.05),
+                                  .withValues(alpha: 0.05),
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
                                   color: Theme.of(context)

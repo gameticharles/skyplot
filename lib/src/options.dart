@@ -260,14 +260,14 @@ class SkyPlotOptions {
           ..color = Colors.blue
           ..style = PaintingStyle.stroke,
         elevationRingPaint = elevationRingPaint ?? Paint()
-          ..color = Colors.grey.withOpacity(0.5)
+          ..color = Colors.grey.withValues(alpha: 0.5)
           ..style = PaintingStyle.stroke,
         divisionLinePaint = divisionLinePaint ?? Paint()
           ..color = Colors.grey
           ..strokeWidth = 1
           ..style = PaintingStyle.stroke,
         dottedLinePaint = dottedLinePaint ?? Paint()
-          ..color = Colors.grey.withOpacity(0.5)
+          ..color = Colors.grey.withValues(alpha: 0.5)
           ..strokeWidth = 1
           ..style = PaintingStyle.stroke,
         arrowPaint = arrowPaint ?? Paint()

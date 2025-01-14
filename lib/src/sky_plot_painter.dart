@@ -118,9 +118,9 @@ class SkyPlotPainter extends CustomPainter {
       startAngle: startAngle,
       endAngle: startAngle + sweepAngle,
       colors: [
-        radarSweepOptions.shadowColor.withOpacity(0.01),
+        radarSweepOptions.shadowColor.withValues(alpha: 0.01),
         radarSweepOptions.shadowColor
-            .withOpacity(radarSweepOptions.shadowOpacity),
+            .withValues(alpha: radarSweepOptions.shadowOpacity),
       ],
     ).createShader(Rect.fromCircle(center: center, radius: radius));
 
