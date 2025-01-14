@@ -1,3 +1,10 @@
+# Change logs
+
+## 0.0.7
+
+* **[IMPROVEMENT]** Fixed issues with `withOpacity` to `withValues`.
+* **[BUG_FIX]** Fixed Dart related issues.
+
 ## 0.0.6
 
 * **[IMPROVEMENT]** Updated dependencies.
