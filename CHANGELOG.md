@@ -1,5 +1,9 @@
 # Change logs
 
+## 0.0.8
+
+* **[IMPROVEMENT]** Updated dependencies.
+
 ## 0.0.7
 
 * **[IMPROVEMENT]** Fixed issues with `withOpacity` to `withValues`.

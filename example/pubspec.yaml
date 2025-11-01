@@ -10,11 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  advance_math: ^4.0.2
+  cupertino_icons: ^1.0.8
+  advance_math: ^5.3.5
   raw_gnss: ^1.1.0
   icons_plus: ^5.0.0
-  permission_handler: ^11.1.0
+  permission_handler: ^12.0.1
   skyplot:
     path: ../
 
